@@ -1,0 +1,82 @@
+{% extends 'frontend/base.html' %} 
+{% load static %}
+{% block content %}
+    <h2 style="text-align: center">Expense Statement</h2>
+    <h5 style="text-align: center">({{ start_week }} to {{ end_week }})</h5>
+    <br>
+    <h3 style="text-align: center;">Your total profit is: <span>{{ profit }}</span> baht</h3>
+    <br>
+    <h4 style="text-align: center;">You've made a total of : <span style="color:green;">{{ income }}</span> baht</h4>
+    <h4 style="text-align: center;">You've spent a total of : <span style="color:red;">{{ expense }}</span> baht</h4>
+    <br>
+    <br>
+    <div class="section">
+        <div>
+            <form action='{% url "add item" %}' method='post'>
+                {% csrf_token %}
+                <div class="container">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for='type'>Type</label>
+                            <select id='type' name="type" class="custom-select custom-select-md">
+                                <option>Income</option>
+                                <option>Expense</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for='description'>Description</label>
+                            <input placeholder="Description" name="description" id='description' type='text' class='form-control'>
+                        </div>
+                        <div class="col">
+                            <label for='amount'>Amount</label>
+                            <input placeholder='Amount' name='amount' id='amount' type='text' class='form-control'>
+                        </div>
+                        <div class="col">
+                            <label for="expense_date">Date</label>
+                            <input placeholder='Date' name="expense_date" id="expense_date" type="date" class='form-control'>
+                        </div>
+                        <button class="btn btn-primary" type="submit" name="action">Add Item
+                            <i class="fas fa-calculator"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div> 
+    </div>  
+    <br>
+    <br>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Income</th>
+                                <th>Expense</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in statement %}
+                            <tr>
+                                <td>{{ s.statement_date }}</td>
+                                <td>{{ s.statement_description }}</td>
+                                <td>{{ s.statement_income }}</td>
+                                <td>{{ s.statement_expense }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <img src="{% static 'images/graph.jpg' %}" alt="expense_graph">
+                </div>
+                <div>
+                    <a href="{% url 'list statement' %}">More expense statement -></a>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}
