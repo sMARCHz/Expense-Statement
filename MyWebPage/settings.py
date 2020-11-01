@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'MyWebPage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'expensedb',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'heroku_58071ffc660de9e',
+        'USER': 'b7ddaebffaca67',
+        'PASSWORD': '449d18bb',
+        'HOST': 'us-cdbr-east-02.cleardb.com',
         'PORT': '3306'
     }
 }
