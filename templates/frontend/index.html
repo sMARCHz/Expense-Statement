@@ -71,7 +71,7 @@
                                     <form method="POST" action="{% url 'remove item' %}">
                                         {% csrf_token %}
                                         <input type="hidden" value="{{s.id}}" name="delete-id">
-                                        <button type="Submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="Submit" class="btn btn-primary" onclick="return confirm('Do you want to remove this item?')"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </td>
                             </tr>
