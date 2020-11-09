@@ -30,7 +30,7 @@
                         </div>
                         <div class="col">
                             <label for='amount'>Amount</label>
-                            <input placeholder='Amount' name='amount' id='amount' type='number' class='form-control' min="0" value="0" step=".01" required>
+                            <input placeholder='Amount' name='amount' id='amount' type='number' class='form-control' value="0" step=".01" required>
                         </div>
                         <div class="col">
                             <label for="expense_date">Date</label>
@@ -57,6 +57,7 @@
                                 <th>Description</th>
                                 <th>Income</th>
                                 <th>Expense</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,6 +67,13 @@
                                 <td>{{ s.statement_description }}</td>
                                 <td>{{ s.statement_income }}</td>
                                 <td>{{ s.statement_expense }}</td>
+                                <td>
+                                    <form method="POST" action="{% url 'remove item' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{s.id}}" name="delete-id">
+                                        <button type="Submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

@@ -66,6 +66,11 @@ def add_item(request):
     plt.savefig("static/images/graph.jpg")
     return redirect('/')
 
+def remove_item(request):
+    Id = request.POST.get('delete-id')
+    Statement.objects.filter(id=Id).delete()
+    return redirect('/')
+
 def list_item(request):
     try:
         statements = Statement.objects.all().order_by('statement_date')
